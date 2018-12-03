@@ -48,6 +48,7 @@
     background #ffffff
     display flex
     align-items center
+    border-bottom 1px  solid #969896
     .text
       position absolute
       top 15px
@@ -58,12 +59,15 @@
   .msite_smallList
     width: 100%
     height 30px
-    background green
+    /*background green*/
     display flex
     .smallList_item
       width: 100%
-      background red
+      /*background red*/
       position relative
+      border-right 1px solid  #969896
+      border-bottom 1px solid  #969896
+
       img
         position absolute
         top 1px

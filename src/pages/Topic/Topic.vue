@@ -11,14 +11,13 @@
           <i class="iconfont icon-gouwuche" @click="$router.push('/shopCart')"></i>
         </div>
 
-
       </div>
       <!--轮播图-->
       <div class="person_content">
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(item,index) in topicData.banner" :key="index">
-              <img :src="item.picUrl" alt="">
+              <img v-lazy="item.picUrl" alt="">
               <div class="banner_items"  >
                 <div class="banner_items_title">{{item.subTitle}}</div>
                 <div class="banner_items_midlle">{{item.title}}</div>
@@ -36,7 +35,7 @@
           <div class="headerList_items_content">
             <div class="headerList_item"  v-for="(item,index) in topicData.column" :key="index">
               <div class="listImg">
-                <img :src="item.picUrl" alt="">
+                <img v-lazy="item.picUrl" alt="">
               </div>
               <div class="listText">
                 <div class="text">{{item.articleCount}}</div>
@@ -48,54 +47,39 @@
           </div>
         </div>
         <!--严选推荐-->
-        <div class="recommend"><!--v-for="(item,index) in topicData.recommend" :key="index"-->
-          <h3 class="title">为你推荐</h3><!--item.name-->
-          <div class="itemMajor">
-            <a href="javascript:;">
-              <img src="./images/3.jpg" alt="">    <!--item.Item[0].picUrl-->
-              <div class="info">
-                <div class="line1">
-                  <div class="Linetitle">如何做清新的白衣少年</div>  <!--item.Item[0].title-->
-                  <div class="price">9.9元起</div><!--item.Item[0].priceInfo-->
+        <div class="recommend">
+          <h3 class="title" v-if="topicData.recommend">{{topicData.recommend.name}}</h3><!--item.name-->
+          <div class="box" v-if="topicData.recommend">
+            <div class="itemMajor" v-if="index == 0" v-for="(item,index) in topicData.recommend.Item " :key="index">
+              <a href="javascript:;">
+                <img v-lazy="item.picUrl" alt="">    <!--item.Item[0].picUrl-->
+                <div class="info">
+                  <div class="line1">
+                    <div class="Linetitle">{{item.title}}</div>  <!--item.Item[0].title-->
+                    <div class="price">{{item.priceInfo}}元起</div><!--item.Item[0].priceInfo-->
+                  </div>
+                  <div class="lin2">{{item.subTitle}}</div> <!--item.Item[0].subTitle-->
                 </div>
-                <div class="lin2">少年感养成必备好物，每满149立减20元</div> <!--item.Item[0].subTitle-->
-              </div>
-            </a>
-          </div>
-          <div class="items">
-            <div class="topicInfo">
-              <div class="line1">
-                <div class="topicTitle">今年世界杯喝什么？</div>
-              </div>
-              <div class="line2">
-                <div class="cont">拉格啤酒8.5折特价，买即赠小龙虾优惠券</div>
-              </div>
+              </a>
             </div>
-            <div class="topicPic">
-              <img src="./images/r.jpg" alt="">
-              <div class="topicTag">
-                <div class="tag">丁磊的好货推荐</div>
+            <div class="items"   v-if="index!== 0" v-for="(item,index) in topicData.recommend.Item " :key="index">
+              <div class="topicInfo">
+                <div class="line1">
+                  <div class="topicTitle">{{item.title}}</div>
+                </div>
+                <div class="line2">
+                  <div class="cont">{{item.subTitle}}</div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="items">
-            <div class="topicInfo">
-              <div class="line1">
-                <div class="topicTitle">今年世界杯喝什么？</div>
-              </div>
-              <div class="line2">
-                <div class="cont">拉格啤酒8.5折特价，买即赠小龙虾优惠券</div>
-              </div>
-            </div>
-            <div class="topicPic">
-              <img src="./images/r.jpg" alt="">
-              <div class="topicTag">
-                <div class="tag">丁磊的好货推荐</div>
+              <div class="topicPic">
+                <img v-lazy="item.picUrl" alt="">
+                <div class="topicTag">
+                  <div class="tag">{{item.nickname}}</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
         <!--十点一刻-->
         <div class="ten_time">
           <div class="name">
@@ -109,6 +93,40 @@
                   <div class="banner_items_title">今日话题</div>
                   <div class="banner_items_midlle">{{item.title}}</div>
                   <div class="banner_items_test">{{item.desc}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--严选臻品-->
+        <div class="recommend">
+          <h3 class="title" v-if="topicData.zhen">{{topicData.zhen.name}}</h3><!--item.name-->
+          <div class="box" v-if="topicData.zhen">
+            <div class="itemMajor" v-if="index == 0" v-for="(item,index) in topicData.zhen.Item " :key="index">
+              <a href="javascript:;">
+                <img v-lazy="item.picUrl" alt="">    <!--item.Item[0].picUrl-->
+                <div class="info">
+                  <div class="line1">
+                    <div class="Linetitle">{{item.title}}</div>  <!--item.Item[0].title-->
+                    <div class="price">{{item.priceInfo}}元起</div><!--item.Item[0].priceInfo-->
+                  </div>
+                  <div class="lin2">{{item.subTitle}}</div> <!--item.Item[0].subTitle-->
+                </div>
+              </a>
+            </div>
+            <div class="items"   v-if="index!== 0" v-for="(item,index) in topicData.zhen.Item " :key="index">
+              <div class="topicInfo">
+                <div class="line1">
+                  <div class="topicTitle">{{item.title}}</div>
+                </div>
+                <div class="line2">
+                  <div class="cont">{{item.subTitle}}</div>
+                </div>
+              </div>
+              <div class="topicPic">
+                <img v-lazy="item.picUrl" alt="">
+                <div class="topicTag">
+                  <div class="tag">{{item.nickname}}</div>
                 </div>
               </div>
             </div>
@@ -138,7 +156,7 @@
               <div>更多精彩</div>
             </div>
             <a href="javascript:;" v-for="(item,index) in topicData.yxWeek">
-              <img :src="item.itemPicUrl" alt="">
+              <img v-lazy="item.itemPicUrl" alt="">
               <div class="desc">{{item.title}}</div>
             </a>
 
@@ -222,7 +240,7 @@
         opacity 0.5
   .person_content
     margin-bottom 10px
-    height: 20000px
+    /*height: 20000px*/
     .swiper-container
       width 100%
       height 200px
@@ -257,20 +275,20 @@
           .banner_items_title
             position absolute
             top 10px
-            left 68px
+            left 92px
             font-size 14px
             color #999
           .banner_items_midlle
             position absolute
             top 39px
-            left 68px
-            font-size 23px
+            left 26px
+            font-size 20px
             font-weight bold
             color #000
           .banner_items_test
             position absolute
             top 78px
-            left 50px
+            left 34px
             font-size 14px
             color #999
     .content_headerList
@@ -321,101 +339,100 @@
 
     .recommend
       width: 100%
-      background pink
+      background #fff
       box-sizing border-box
-      padding 0 15px
+      padding  0 19px 4px
+      margin-bottom 20px
       .title
         width: 100%
         height: 40px
         line-height 40px
         text-align center
         font-size 21px
-        background green
-      .itemMajor
-        width: 100%
-        margin-bottom 20px
-        border 1px solid #999
-        background red
-        img
+        /*background green*/
+      .box
+        .itemMajor
           width: 100%
-          height: 100%
-        .info
-          padding  8px 8px 23px 8px
-          background #fff
-          .line1
-            display flex
-            width: 100%
-            background green
-            margin-bottom 13px
-            height 30px
-            line-height 30px
-            text-align center
-            .Linetitle
-              font-size 22px
-              margin-right 34px
-            .price
-              font-size 18px
-              opacity 0.5
-
-
-          .lin2
-            width: 100%
-            font-size 18px
-            background pink
-
-
-
-      .items
-        display flex
-        width: 100%
-        height: 130px
-        background red
-        position relative
-        margin-bottom 20px
-        .topicInfo
-          box-sizing border-box
-          padding 0 6px
-          width: 65%
-          height: 100%
-          background orange
-          .line1
-            width: 100%
-            margin-top 20px
-            margin-bottom 22px
-            background bisque
-            .topicTitle
-              font-size 20px
-
-          .line2
-            width: 100%
-
-            margin-bottom 6px
-            background brown
-            .cont
-              font-size 18px
-              color #666666
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-
-        .topicPic
-          width: 35%
-          height: 100%
+          margin-bottom 20px
+          border 1px solid #999
+          /*background red*/
           img
             width: 100%
             height: 100%
-          .topicTag
-            position absolute
-            top 10px
-            left 228px
-            /*width: 30px*/
-            /*height: 15px*/
-            background #eee
-            .tag
-              font-size 13px
-              color black
-              opacity:0.5
-              border-radius 6px
+          .info
+            padding  8px 8px 23px 8px
+            background #fff
+            .line1
+              display flex
+              width: 100%
+              /*background green*/
+              margin-bottom 13px
+              height 30px
+              line-height 30px
+              text-align center
+              .Linetitle
+                font-size 22px
+                margin-right 34px
+              .price
+                font-size 18px
+                opacity 0.5
+
+            .lin2
+              width: 100%
+              font-size 18px
+              /*background pink*/
+        .items
+          display flex
+          width: 100%
+          height: 130px
+          /*background red*/
+          position relative
+          margin-bottom 20px
+          border 1px solid #969896
+          .topicInfo
+            box-sizing border-box
+            padding 0 6px
+            width: 65%
+            height: 100%
+            /*background orange*/
+            .line1
+              width: 100%
+              margin-top 20px
+              margin-bottom 22px
+              /*background bisque*/
+              .topicTitle
+                font-size 20px
+
+            .line2
+              width: 100%
+
+              margin-bottom 6px
+              /*background brown*/
+              .cont
+                font-size 18px
+                color #666666
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+          .topicPic
+            width: 35%
+            height: 100%
+            img
+              width: 100%
+              height: 100%
+            .topicTag
+              position absolute
+              top 10px
+              left 228px
+              /*width: 30px*/
+              /*height: 15px*/
+              background #eee
+              .tag
+                font-size 13px
+                color black
+                opacity:0.5
+                border-radius 6px
 
     .ten_time
       width: 100%
@@ -444,11 +461,11 @@
           margin-top 10px
           margin-right 10px
           img
-            width 100%;
+            width 90%;
             height 100%;
           .banner_items
             position: absolute;
-            left: 0;
+            left: -37px;
             top: 0;
             bottom: 0;
             right: 0;
@@ -463,20 +480,20 @@
             .banner_items_title
               position absolute
               top 10px
-              left 86px
+              left 84px
               font-size 14px
               color #999
             .banner_items_midlle
               position absolute
               top 39px
-              left 12px
-              font-size 23px
+              left 71px
+              font-size 20px
               font-weight bold
               color #000
             .banner_items_test
               position absolute
               top 78px
-              left 12px
+              left 48px
               font-size 14px
               color #999
     .yanxuanlook
